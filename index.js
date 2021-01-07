@@ -58,7 +58,7 @@ function addData () {
             object.name = Name;
             object.address = Address;
             const jsonString = JSON.stringify(object)
-            fs.writeFileSync("data.json", jsonString)
+            fs.writeFileSync("data.json", jsonString, { flag: 'a' })
             continueKro();
         })
     }) 
@@ -73,7 +73,7 @@ function deleteData () {
     r1.question(chalk.redBright('Enter name of person, whose data is to be removed: '), (Name) => {
         for(let i=0 ; i < data.length; i++) {
             if(data[i].name !== Name) {
-                filter.push(data[i])
+                filter.filter(data[i])
                 console.log('Data removed successfully')
             }else{
                 console.log(chalk.red('Yo, find another name. This one is not available'))
@@ -81,7 +81,7 @@ function deleteData () {
         }
 
         const jsonString = JSON.stringify(filter)
-        fs.writeFileSync("data.json", jsonString, mode='a')
+        fs.writeFileSync("data.json", jsonString)
         continueKro()
     })
 }
